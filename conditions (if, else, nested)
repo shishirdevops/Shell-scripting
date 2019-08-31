@@ -1,0 +1,113 @@
+In Bash, we have the following conditional statements:
+
+if..then..fi statement (Simple If)
+if..then..else..fi statement (If-Else)
+if..elif..else..fi statement (Else If ladder)
+if..then..else..if..then..fi..fi..(Nested if)
+These are similar to the awk if statements we discussed earlier.
+
+1. Bash If..then..fi statement
+if [ conditional expression ]
+then
+	statement1
+	statement2
+	.
+fi
+This if statement is also called as simple if statement. If the given conditional expression is true, it enters and executes the statements enclosed between the keywords “then” and “fi”. If the given expression returns zero, then consequent statement list is executed.
+
+if then fi example:
+
+#!/bin/bash
+count=100
+if [ $count -eq 100 ]
+then
+  echo "Count is 100"
+fi
+2. Bash If..then..else..fi statement
+If [ conditional expression ]
+then
+	statement1
+	statement2
+	.
+else
+	statement3
+	statement4
+	.
+fi
+If the conditional expression is true, it executes the statement1 and 2. If the conditional expression returns zero, it jumps to else part, and executes the statement3 and 4. After the execution of if/else part, execution resume with the consequent statements.
+
+if then else fi example:
+
+
+ 
+#!/bin/bash
+count=99
+if [ $count -eq 100 ]
+then
+  echo "Count is 100"
+else
+  echo "Count is not 100"
+fi
+Note: This article is part of the ongoing Bash Tutorial series.
+
+3. Bash If..elif..else..fi
+If [ conditional expression1 ]
+then
+	statement1
+	statement2
+	.
+elif [ conditional expression2 ]
+then
+	statement3
+	statement4
+	.
+.
+.
+else
+	statement5
+fi
+You can use this if .. elif.. if , if you want to select one of many blocks of code to execute. It checks expression 1, if it is true executes statement 1,2. If expression1 is false, it checks expression2, and if all the expression is false, then it enters into else block and executes the statements in the else block.
+
+if then elif then else fi example:
+
+#!/bin/bash
+count=99
+if [ $count -eq 100 ]
+then
+  echo "Count is 100"
+elif [ $count -gt 100 ]
+then
+  echo "Count is greater than 100"
+else
+  echo "Count is less than 100"
+fi
+4. Bash If..then..else..if..then..fi..fi..
+If [ conditional expression1 ]
+then
+	statement1
+	statement2
+	.
+else
+	if [ conditional expression2 ]
+	then
+		statement3
+		.
+	fi
+fi
+If statement and else statement could be nested in bash. The keyword “fi” indicates the end of the inner if statement and all if statement should end with the keyword “fi”.
+
+The “if then elif then else fi” example mentioned in above can be converted to the nested if as shown below.
+
+#!/bin/bash
+count=99
+if [ $count -eq 100 ]
+then
+  echo "Count is 100"
+else
+  if [ $count -gt 100 ]
+  then
+    echo "Count is greater than 100"
+  else
+  echo "Count is less than 100"
+  fi
+fi
