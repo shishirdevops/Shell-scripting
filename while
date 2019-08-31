@@ -1,0 +1,125 @@
+bash while loop syntax
+The syntax is as follows:
+
+while [ condition ]
+do
+   command1
+   command2
+   command3
+done
+command1 to command3 will be executed repeatedly till condition is true. The argument for a while loop can be any boolean expression. Infinite loops occur when the conditional never evaluates to false. Here is the while loop one-liner syntax:
+
+while [ condition ]; do commands; done
+while control-command; do COMMANDS; done
+For example following while loop will print welcome 5 times on screen:
+
+#!/bin/bash
+x=1
+while [ $x -le 5 ]
+do
+  echo "Welcome $x times"
+  x=$(( $x + 1 ))
+done
+And here is above code as a bash while one liner:
+x=1; while [ $x -le 5 ]; do echo "Welcome $x times" $(( x++ )); done
+
+Here is a sample shell code to calculate factorial using while loop:
+
+#!/bin/bash
+counter=$1
+factorial=1
+while [ $counter -gt 0 ]
+do
+   factorial=$(( $factorial * $counter ))
+   counter=$(( $counter - 1 ))
+done
+echo $factorial
+To run just type:
+$ chmod +x script.sh
+$ ./script.sh 5
+
+
+The while loop - Bash while loop examples for Linux and Unix
+The while loop in action on my Ubuntu Linux desktop
+
+While loops are frequently used for reading data line by line from file:
+#!/bin/bash
+FILE=$1
+# read $FILE using the file descriptors
+exec 3<&0
+exec 0<$FILE
+while read line
+do
+	# use $line variable to process line
+	echo $line
+done
+exec 0<&3
+You can easily evaluate the options passed on the command line for a script using while loop:
+
+......
+..
+while getopts ae:f:hd:s:qx: option
+do
+        case "${option}"
+        in
+                a) ALARM="TRUE";;
+                e) ADMIN=${OPTARG};;
+                d) DOMAIN=${OPTARG};;
+                f) SERVERFILE=$OPTARG;;
+                s) WHOIS_SERVER=$OPTARG;;
+                q) QUIET="TRUE";;
+                x) WARNDAYS=$OPTARG;;
+                \?) usage
+                    exit 1;;
+        esac
+done
+.......
+..
+How do I use while as infinite loops?
+Infinite for while can be created with empty expressions, such as:
+
+#!/bin/bash
+while :
+do
+	echo "infinite loops [ hit CTRL+C to stop]"
+done
+Conditional while loop exit with break statement
+You can do early exit with the break statement inside the whil loop. You can exit from within a WHILE using break. General break statement inside the while loop is as follows:
+
+while [ condition ]
+do
+   statements1      #Executed as long as condition is true and/or, up to a disaster-condition if any.
+   statements2
+  if (disaster-condition)
+  then
+	break       	   #Abandon the while lopp.
+  fi
+  statements3          #While good and, no disaster-condition.
+done
+In this example, the break statement will skip the while loop when user enters -1, otherwise it will keep adding two numbers:
+
+#!/bin/bash
+ 
+while :
+do
+	read -p "Enter two numnbers ( - 1 to quit ) : " a b
+	if [ $a -eq -1 ]
+	then
+		break
+	fi
+	ans=$(( a + b ))
+	echo $ans
+done
+Early continuation with the continue statement
+To resume the next iteration of the enclosing WHILE loop use the continue statement as follows:
+
+while [ condition ]
+do
+  statements1      #Executed as long as condition is true and/or, up to a disaster-condition if any.
+  statements2
+  if (condition)
+  then
+	continue   #Go to next iteration of I in the loop and skip statements3
+  fi
+  statements3
+done
